@@ -26,24 +26,26 @@ export default function PhoneMockup() {
       return;
     }
 
-    const newMedia = acceptedFiles.map((file) => {
-      const fileURL = URL.createObjectURL(file);
-      let fileType: "image" | "video" | "gif";
+    const newMedia = acceptedFiles
+      .map((file) => {
+        const fileURL = URL.createObjectURL(file);
+        let fileType: "image" | "video" | "gif";
 
-      if (file.type.startsWith("image")) {
-        if (file.type === "image/gif") {
-          fileType = "gif";
+        if (file.type.startsWith("image")) {
+          if (file.type === "image/gif") {
+            fileType = "gif";
+          } else {
+            fileType = "image";
+          }
+        } else if (file.type.startsWith("video")) {
+          fileType = "video";
         } else {
-          fileType = "image";
+          return null;
         }
-      } else if (file.type.startsWith("video")) {
-        fileType = "video";
-      } else {
-        return null;
-      }
 
-      return { type: fileType, src: fileURL, objectFit: "cover" };
-    }).filter((item): item is MediaItem => item !== null);
+        return { type: fileType, src: fileURL, objectFit: "cover" };
+      })
+      .filter((item): item is MediaItem => item !== null);
 
     setMedia((prevMedia) => [...prevMedia, ...newMedia].slice(0, 5));
   };

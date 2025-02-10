@@ -10,13 +10,13 @@ const ConfettiComponent = () => {
 
   useEffect(() => {
     setShowConfetti(true);
-    const timer = setTimeout(() => setShowConfetti(false), 5000);
+    const timer = setTimeout(() => setShowConfetti(false), 10000);
     return () => clearTimeout(timer);
   }, []);
 
   if (!showConfetti || typeof window === "undefined") return null;
 
-  return <Confetti width={width} height={height} recycle={false} numberOfPieces={800} colors={["#FFB6C1", "#FF69B4", "#FFD700", "#DB7093"]} />;
+  return <Confetti width={width} height={height} recycle={false} numberOfPieces={1800} colors={["#FFB6C1", "#FF69B4", "#FFD700", "#DB7093"]} />;
 };
 
 export default ConfettiComponent;
