@@ -15,9 +15,9 @@ type MediaItem = {
 export default function PhoneMockup() {
   const [media, setMedia] = useState<MediaItem[]>([
     { type: "image", src: "/images/default-1.webp", objectFit: "cover" },
-    { type: "gif", src: "/images/default-2.gif", objectFit: "contain" },
     { type: "video", src: "/videos/default-1.mp4", objectFit: "cover" },
     { type: "video", src: "/videos/default-2.mp4", objectFit: "cover" },
+    { type: "gif", src: "/images/default-2.gif", objectFit: "contain" },
   ]);
 
   const onDrop = (acceptedFiles: File[]) => {
