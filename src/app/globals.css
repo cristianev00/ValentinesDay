@@ -79,7 +79,7 @@ body {
 }
 
 body {
-  background-image: url("/bg.svg") !important;
+  background-image: url("/bg.webp") !important;
   background-size: cover !important;
   background-position: center !important;
   background-repeat: no-repeat !important;

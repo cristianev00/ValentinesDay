@@ -12,16 +12,18 @@ type MediaItem = {
   objectFit: "cover" | "contain";
 };
 
+const DEFAULT_MEDIA: MediaItem[] = [
+  { type: "image", src: "/images/default-2.webp", objectFit: "cover" },
+  { type: "image", src: "/images/default-1.webp", objectFit: "cover" },
+  { type: "image", src: "/images/default-3.webp", objectFit: "cover" },
+  { type: "video", src: "/videos/default-1.mp4", objectFit: "cover" },
+];
+
 export default function PhoneMockup() {
-  const [media, setMedia] = useState<MediaItem[]>([
-    { type: "image", src: "/images/default-1.webp", objectFit: "cover" },
-    { type: "video", src: "/videos/default-1.mp4", objectFit: "cover" },
-    { type: "video", src: "/videos/default-2.mp4", objectFit: "cover" },
-    { type: "gif", src: "/images/default-2.gif", objectFit: "contain" },
-  ]);
+  const [media, setMedia] = useState<MediaItem[]>(DEFAULT_MEDIA);
 
   const onDrop = (acceptedFiles: File[]) => {
-    if (media.length + acceptedFiles.length > 5) {
+    if (acceptedFiles.length > 5) {
       alert("You can only upload up to 5 media files.");
       return;
     }
@@ -32,11 +34,7 @@ export default function PhoneMockup() {
         let fileType: "image" | "video" | "gif";
 
         if (file.type.startsWith("image")) {
-          if (file.type === "image/gif") {
-            fileType = "gif";
-          } else {
-            fileType = "image";
-          }
+          fileType = file.type === "image/gif" ? "gif" : "image";
         } else if (file.type.startsWith("video")) {
           fileType = "video";
         } else {
@@ -47,7 +45,7 @@ export default function PhoneMockup() {
       })
       .filter((item): item is MediaItem => item !== null);
 
-    setMedia((prevMedia) => [...prevMedia, ...newMedia].slice(0, 5));
+    setMedia(newMedia.length > 0 ? newMedia : DEFAULT_MEDIA);
   };
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -83,17 +81,19 @@ export default function PhoneMockup() {
                   <Image
                     src={item.src}
                     alt={`Uploaded ${index + 1}`}
-                    layout="fill"
-                    objectFit={item.objectFit}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority={index === 0}
+                    style={{ objectFit: item.objectFit }}
                     className="rounded-[2rem]"
                   />
-                ) : item.type === "video" ? (
+                ) : (
                   <video
                     src={item.src}
                     controls
                     className="rounded-[2rem] w-full h-full object-cover"
                   />
-                ) : null}
+                )}
               </div>
             ))}
           </Carousel>

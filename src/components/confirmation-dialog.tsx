@@ -22,7 +22,7 @@ export default function ConfirmationDialog({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="rounded-lg shadow-xl">
-        <DialogHeader className="text-cente text-slate-500 p-4">
+        <DialogHeader className="text-center text-slate-500 p-4 items-center">
           <DialogTitle>
             <motion.p
               initial={{ opacity: 0, y: -50 }}
@@ -33,7 +33,7 @@ export default function ConfirmationDialog({
               💖 I Wanna Check It&lsquo;s You
             </motion.p>
           </DialogTitle>
-          <DialogDescription>
+          <DialogDescription className="text-center items-center">
             <motion.a
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

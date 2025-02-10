@@ -36,19 +36,19 @@ export default function ResponseSection() {
         Math.pow(mouseY - (buttonRect.top + buttonRect.height / 2), 2)
     );
 
-    if (distance < 50) {
-      const offsetX = Math.random() * 200 - 100;
-      const offsetY = Math.random() * 200 - 100;
+    if (distance < 500) {
+      const offsetX = Math.random() * 400 - 100;
+      const offsetY = Math.random() * 400 - 100;
       setNoButtonPosition({ x: offsetX, y: offsetY });
     }
   };
 
   return (
-    <div className="flex flex-col items-center space-y-4 font-karla justify-center">
-      <p className="text-lg text-gray-700 text-center">
+    <div className="w-full md:w-[400px] mx-auto flex flex-col space-y-4 font-karla text-center md:text-left">
+      <p className="text-lg text-gray-700">
         I would love to spend this special day with you.
       </p>
-      <div className="flex space-x-4">
+      <div className="flex space-x-4 justify-center md:justify-start">
         <Button variant="outline" onClick={handleYesClick}>
           Yes
         </Button>
@@ -71,13 +71,12 @@ export default function ResponseSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center text-xl font-semibold text-pink-600 mt-6"
+          className="text-center md:text-left text-xl font-semibold text-pink-600 mt-6"
         >
           &quot;You become responsible, forever, for what you have tamed.&quot;
           — Le Petit Prince
         </motion.p>
       )}
-
       <ConfirmationDialog
         isOpen={isDialogOpen}
         onClose={() => setIsDialogOpen(false)}
